@@ -10,7 +10,7 @@ Agile movement was introduced as new way of develop software. A way in which you
 To improve further Agile movement, a way was needed to reduce the transition from development to operation. Devops is intended to bridge the gap between operations and development teams using continuos practices. It combines software development, quality assurance, and operations. Although Devops was born as culture from a theoretical perspective, the pragmatic way is to treat it primarily as a role. We will not deal with this discussion here. 
 
 ## Application Programming Interface
-Another concept you will hear often is an API or Application Programming Interface.
+Another concept you will often hear is an API or Application Programming Interface. Abstraction is one of the fundamentals concepts in Computer Science. It means removing unnecessaray details from systems implementation. For example, you do not need to know about Chemistry of Materials in order to use a CPU, or you do not need to know how an Operating System works if you want to create a website. APIs are an example of abstraction because it let your system to communicate with other systems without having to know how they are implemented. This communication has to be somehow standard between the parties involve. SOAP(Simple Object Access Protocol) and REST (Representational State Transfer) are specifications exchange of information between APIs. The former is a protocol, while the latter is an architectural style, which means there is no obligation on how to implement it. 
 
 ## Microservice Architecture
 You will work with an application based on a microservice architecture style, also it is an architecture that you will often find in your daily work. This is why we think is important for you to have a high-level overview of this style.  
@@ -21,3 +21,6 @@ Microservices is way to structure your application as a collection of services t
 ![](./imgs/microservice.png)
 
 ## Additional Resource
+* [The Agile Manifesto](https://agilemanifesto.org/)
+* [What are microservices?](https://microservices.io/)
+* [Abstraction](https://isaaccomputerscience.org/concepts/dsa_ctm_abstraction?examBoard=all&stage=all)
