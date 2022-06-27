@@ -20,7 +20,10 @@ Microservices is way to structure your application as a collection of services t
 * Owned by a small team. Due to its loosely coupled feature, each service can be developed by different teams.
 ![](./imgs/microservice.png)
 
-## Additional Resource
+## References
 * [The Agile Manifesto](https://agilemanifesto.org/)
 * [What are microservices?](https://microservices.io/)
 * [Abstraction](https://isaaccomputerscience.org/concepts/dsa_ctm_abstraction?examBoard=all&stage=all)
+* [What's an API](https://www.redhat.com/en/topics/api/what-are-application-programming-interfaces)
+* [What is Devops? REALLY understand it](https://www.youtube.com/watch?v=0yWAtQ6wYNM)
+* [DevOps and AWS](https://aws.amazon.com/devops/)
