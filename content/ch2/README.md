@@ -8,4 +8,7 @@ Networking structure is so complex that it is divided into multiple layers. Each
 * Transport layer: includes specifications on how the data will be break into packets, and how these packets will be reassembly. Also, it performs data integrity checking. Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) are the most common protocols in this layer. 
 * Internet or network layer: once the packets are ready to be sent, this layer defines how to move those packets from a source to a destination host. The Internet Protocol (IP) is used to perform this task.
 * Link layer: defines how to send data across a wired or wireless link. For example, Ethernet or 802.11 (WiFi).
+
 ## Operating System
+An operating system acts as an intermediary between high-level programs (Firefox, Terminal, Spreadsheets, and so on) and your computer's hardware. It decides what process runs next, what part of the main memory allocates to a process, and what devices are compatible with the system.  
+Processes are crucial because are the ones which tell to the computer what operations to perform. A *process* is a program running in main memory (RAM). The set of processes running on a system make up the *user space* - parts of the RAM that user processes can access. For example, a web server runs in the user space.  These processes are managed by the kernel. The kernel is the core of the operating system. It's the one which tells to the CPU where to look for its next task. The memory area that only the kernel can access is called *kernel space*.
