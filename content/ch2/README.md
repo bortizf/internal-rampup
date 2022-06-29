@@ -16,4 +16,7 @@ Processes are crucial because are the ones which tell to the computer what opera
 * Memory management: modern CPUs include a memory management unit (MMU) that let us use a memory access scheme called *virtual memory*. In this scheme, a process does not directly access the physical memory location. The kernel sets up each process to act as if it had an entire machine to itself. The virtual addresses are mapped to translate to the physical ones. The kernel has to mantain and alter this memory address map.
 * Device management: the kernel manages all hardware devices so that user processes can interact with them. A device a driver is a software that describes how to use and control a particular device. Those drivers are located in the kernel.
 * System calls: in order to interact with the kernel, user processes have to use special functions called *system calls*. For example, through them processes can open (*open()*), read (*read()*), and write (*write()*) files. Processes are created through *fork()* and *exec()* system calls.
-![](./imgs/fork-exec-exit-wait.png)
+
+<p align="center">
+<img src=imgs/fork-exec-exit-wait.png >
+</p>
