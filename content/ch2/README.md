@@ -26,6 +26,18 @@ In order to allow and differentiate multiple connections open by proccesses the 
 
 * DHCP (Port 67): Dynamic Host Configuration Protocol. It assigns IP addresses and other communication parameters (DNS Server, Gateway, Network Mask) to devices connected to the network. It uses a client-server model.
 
+### Domain Name Server 
+We access services on internet through domain names (www.google.com or www.perficient.com), however computers do not understand those names, but they do understand IP adressess. Therefore, there must be a translation mechanism between domains and IPs. This is the role of DNS. For example, DNS translates perficient.com into 130.250.210.219 IP so that the browser can make the request to the appropriate server. In [this video](https://www.youtube.com/watch?v=dl-C6cBoRg4) you can learn more about how DNS works.  
+
+In addition to the IP, a DNS Server can provide other information such as an email server or an alias to a domain. This is accomplished via DNS Records. We will mention some of them:
+* A record - holds the IP address associated with a domain. A request with an A record for google.com returns 142.250.78.78.
+* CNAME record - returns a domain alias associated for another domain. A request with a CNAME record for google.com returns ns1.google.com.
+* MX record - returns a mail server to redirects emails. a request with a MX record for google.com returns smtp.google.com.
+* NS record - returns the authoritative DNS server for a domain.
+
+If you want to play with DNS records and practice the concepts, this [interactive website](https://messwithdns.net/) will help you. 
+
+
 ## Operating System
 An operating system acts as an intermediary between high-level programs (Firefox, Terminal, Spreadsheets, and so on) and your computer's hardware. It decides what process runs next, what part of the main memory allocates to a process, and what devices are compatible with the system.  
 Processes are crucial because are the ones which tell to the computer what operations to perform. A *process* is a program running in main memory (RAM). The set of processes running on a system make up the *user space* - parts of the RAM that user processes can access. For example, a web server runs in the user space.  These processes are managed by the kernel. The kernel is the core of the operating system. It's the one which tells to the CPU where to look for its next task. The memory area that only the kernel can access is called *kernel space*. The kernel mainly has 4 functions:
