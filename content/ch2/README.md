@@ -3,11 +3,28 @@ As a Devops Engineer you need to know how data communication works at a high lev
 On the other hand, you will frequently be in front of a terminal with Bash or Powershell, or in your Cloud's terminal. You will hear about standard input or output (I/O). You will also need to have a control of the processes running on your systems, and will eventually work with some form of virtualization. That is why we believe it is important for you to know the basic concepts of an operating system, what parts it is made up of, and how they are related.
 
 ## Networking
-Networking structure is so complex that it is divided into multiple layers. Each layer has specific responsabilities and relies on lower layers to provide services. The definition of the layers is described by TCP/IP and OSI model. We will use the TCP/IP Model.
-* Application layer: contains high-level protocols that applications and servers use to communicate. For example, Hypertext Transfer Protocol (HTTP) or Transport Layer Security (TLS). 
-* Transport layer: includes specifications on how the data will be break into packets, and how these packets will be reassembly. Also, it performs data integrity checking. Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) are the most common protocols in this layer. 
-* Internet or network layer: once the packets are ready to be sent, this layer defines how to move those packets from a source to a destination host. The Internet Protocol (IP) is used to perform this task.
-* Link layer: defines how to send data across a wired or wireless link. For example, Ethernet or 802.11 (WiFi).
+Networking structure is so complex that it is divided into multiple layers. Each layer has specific responsabilities and relies on lower layers to provide services. The definition of the layers is described by TCP/IP and OSI model. In this summary, we will try to keep things as simple as possible, so we will not go into details. If want to know more about network layers visit this website - [What is the OSI Model?](https://www.cloudflare.com/learning/ddos/glossary/open-systems-interconnection-model-osi/)
+
+We are going to focus on practical tasks and concepts, so we will leave you lectures about topics you may need to know
+
+* [What is a network?](https://www.cloudflare.com/learning/network-layer/what-is-the-network-layer/)
+* [What is IP?](https://www.cloudflare.com/learning/dns/glossary/what-is-my-ip-address/)
+* [What is a subnet?](https://www.cloudflare.com/learning/network-layer/what-is-a-subnet/)
+* [What is TCP?](https://www.geeksforgeeks.org/what-is-transmission-control-protocol-tcp/)
+
+Our work is mostly on layer 4 and 7 of OSI Model, so we will discuss concepts and protocols related to them.  
+In order to allow and differentiate multiple connections open by proccesses the computer uses a port number. A port number is a virtual point where network connections start and end, they are software-based. Here is a list with popular ports and protocols:
+* HTTP (Port 80): Hypertext Transfer Protocol. It allows the exchange of information on World Wide Web (WWW) using a client-server model. [Here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) you can find more information about it.
+* HTTPS (Port 443): HTTP Secure. It's the secure and encrypted version of HTTP. It uses an encryption protocol called Transport Layer Security (TLS). [Here](https://www.ssl.com/faqs/what-is-https/) you can find more information about it.
+* SSH (Port 22): is a method for secure remote login from one computer to another. Also, it allows file transfers and issues remote commands. To learn more, visit [here](https://www.ssh.com/academy/ssh/protocol)
+* FTP (Port 20 and 21): File Transfer Protocol. File transfers between client and server. Its communication is unencrypted. In [this video](https://www.youtube.com/watch?v=tOj8MSEIbfA) you can find information about it, and the encrypted version of it.
+* DNS (Port 53): Essential procotol for the modern internet. It matches a domain name to an IP address so that we don't have to type the IP address everytime we need to consume a service on Internet. We will cover this in more detail later.
+* SMTP (Port 25): Simple Mail Transfer Protocol. It's the industry standard protocol for email sending. It's an email delivery protocol, not email retrieval protocol. For email retrieval exists IMAP or POP3 protocols. [Here](https://www.cloudflare.com/learning/email-security/what-is-smtp/) is more information about it.
+<p align="center">
+<img style="width:300px; height:150px" src=imgs/SMTP-IMAP-1.png >
+</p>
+
+* DHCP (Port 67): Dynamic Host Configuration Protocol. It assigns IP addresses and other communication parameters (DNS Server, Gateway, Network Mask) to devices connected to the network. It uses a client-server model.
 
 ## Operating System
 An operating system acts as an intermediary between high-level programs (Firefox, Terminal, Spreadsheets, and so on) and your computer's hardware. It decides what process runs next, what part of the main memory allocates to a process, and what devices are compatible with the system.  
