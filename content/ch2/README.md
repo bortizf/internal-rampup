@@ -37,6 +37,26 @@ In addition to the IP, a DNS Server can provide other information such as an ema
 
 If you want to play with DNS records and practice the concepts, this [interactive website](https://messwithdns.net/) will help you. 
 
+### Load Balancer & Reverse Proxy 
+In this training we will treat these terms interchangeably because most of their functions are the same. These components act as intermediaries in a client-server model.
+<p align="center">
+<img style="width:300px; height:150px" src=imgs/Proxy.jpg >
+</p>
+we will focus on load balancers because implicitly it's a reverse proxy. 
+Their main porpuse is the distribution of workloads across two or more backends. However nowdays they perform a ton of other tasks such as service discovery (what backends do I know?) or health checking (what backend are ready to response requests?). The most popular types of load balancers are L4 (operates at the 4th OSI layer) y L7 (operastes at the 7th OSI layer). 
+
+Here is a list of resources where you can learn more about this:
+
+* [What is a Reverse Proxy vs. Load Balancer?](https://www.nginx.com/resources/glossary/reverse-proxy-vs-load-balancer/) [Introduction]
+* [Introduction to modern network load balancing and proxying](https://blog.envoyproxy.io/introduction-to-modern-network-load-balancing-and-proxying-a57f6ff80236) [Intermediate]
+* [What is a Load Balancer?](https://www.youtube.com/watch?v=sCR3SAVdyCc) [video]
+
+Can you answer these questions?
+
+* What's the difference between a L4 and L7 load balancer? Can you give an example?
+* In which cases would you use a L7 load balancer?
+* What are the benefits of a load balancer?
+* Describe a situation where a proxy isn't a load balancer and what would be its use. 
 
 ## Operating System
 An operating system acts as an intermediary between high-level programs (Firefox, Terminal, Spreadsheets, and so on) and your computer's hardware. It decides what process runs next, what part of the main memory allocates to a process, and what devices are compatible with the system.  
