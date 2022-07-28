@@ -50,6 +50,20 @@ cat file2 # displays the file2 content
 chmod u+x file2 # Allows the file owner to execute file2. 
 ```
 
+Another powerfull feature of the shell is piping. It allows you to redirect input and output of commands. If you need to order a file you can do this:
+```bash
+cat /etc/passwd | sort
+```
+where the metacharecter | connects the output of *cat* with the input for the *sort* command. You can connect commands as much as you want, and you can solve complex tasks with this.  
+
+The > metacharacter redirects the output of a command to another file (or device). If you need to save the output of cat on file, you can do this:
+```bash
+cat /etc/passwd > output.txt
+```
+Instead of displaying the content to the stdout, it will be redirected to the output.txt file.
+
+We also have the < metacharacter. This redirect the stdin. Although this is not as useful as its opposite. Finally, if we want to save the errors of a command, we can redirect the stderr too. This is done via 2> metacharacter. 
+
 ### Text Processing with Grep, AWK and Sed
 
 **Grep** is a utility to find text on files using regular expressions. It has many flags to expand its functionality, you can learn more on its manual page (man grep). Let see that you want to know if a file (*test-file*) contains a word (*word-test*) and if so, you want to know on what line it's. 
@@ -61,3 +75,14 @@ grep -l "word-test" *.txt # With the '-l' flag you can search for all filenames 
 
 grep "word-*test" $pwd/test-file # You can use regular expression in your searchs. In this case it will match any of these strings: word-test, word--test, wordtest or word-------test. The '*' matches 0 or more '-'.
 ```
+
+## Challenges
+In this section you will find tasks that will help practice the commands we have seen and others.
+
+1. Display the content of the /etc/passwd, count how many lines it has and sort in a decreasing order (z-a).
+2. Find what is your User ID and Group ID. This information is stored in the /etc/passwd file. Also, find what's the line they are. Of course, you should do this without displaying the file's content.
+3. List files and directories that are hidden on you $pwd. Also, list them by time (use the man page to see what flag you need).
+4. Create a file called *myfile*. Updates its permissions so only your user can read, write, and execute it. 
+5. Create 5 files (f1,f2,...,f5) without having to type 5 times the touch command. 
+6. Move to another location where those 5 files are not. Then do a search to find them, and execute the *ls -l* command to each of those. This should be done with just one command. 
+7. Create the directory d1/d2/d3/foo/d4. If the previous directories don't exist, then they should also be created automatically.
