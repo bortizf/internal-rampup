@@ -76,6 +76,38 @@ grep -l "word-test" *.txt # With the '-l' flag you can search for all filenames 
 grep "word-*test" $pwd/test-file # You can use regular expression in your searchs. In this case it will match any of these strings: word-test, word--test, wordtest or word-------test. The '*' matches 0 or more '-'.
 ```
 
+**Sed** performs editing operations on text. You can print or delete a range of lines, but also you can substitute words or phrases based on regular expressions. Let's see these tree operations:
+
+To *print* the nth line of a file you will use 'np'. For example, to print the fifth one:
+```bash
+sed -n '5p' file
+```
+You will need the -n flag because sed prints each line by default, and if you specify the *p* option, it will print twice each line.
+
+You can also use a range format to print lines. For example, to print lines 10th-16th:
+```bash
+sed -n '10,16p' file
+```
+To *delete* a line will be a similar format, but instead of using *p* letter you will use *d*. For example, to delete the first 5 lines:
+```bash
+sed '1,5d' file
+```
+In this case you no longer need the -n flag because the operation isn't print.
+
+Finally, the most well-known operation of sed - *substitute*. You can perform the search based on a regular expression. The basic syntax for is 's/old_w/new_w/'.  The / is used to separate the words, however you can use other characters as well. Let's see this example:
+
+```bash
+echo "www.mywebsite.com/login.html" | sed 's_.com/login_.net/home_'
+# The output will be www.mywebsite.net/home.html
+```
+In the previous example we used the _ character as a delimiter. If you need to replace multiple ocurrences of a word you will need to specify it because sed command operates on the first match. 
+
+```bash
+string="TEXT TEXT TEXT HELO TEXT HELLO TEXT"
+echo $string | sed 's/TEXT/text/' # this will replace the first occurrence of TEXT
+echo $string | sed 's/TEXT/text/g' # this will replace all occurrences of TEXT
+```
+
 ## Challenges
 In this section you will find tasks that will help practice the commands we have seen and others.
 
