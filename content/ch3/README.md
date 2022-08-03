@@ -18,7 +18,7 @@ ls myfolder/ # displays the content inside myfolder/
 pwd # displays the absolute path of myfolder, e.g., /home/user/myfolder/
 ```
 
-### Files and Text
+## Files and Text
 From this section we will use variables to abreviate words. When we use $pwd we'll be refering to you current working directory. 
 
 * **mkdir**: Creates a directory in your $pwd. Throws an error if the directory you're trying to create already exists
@@ -64,7 +64,7 @@ Instead of displaying the content to the stdout, it will be redirected to the ou
 
 We also have the < metacharacter. This redirect the stdin. Although this is not as useful as its opposite. Finally, if we want to save the errors of a command, we can redirect the stderr too. This is done via 2> metacharacter. 
 
-### Text Processing with Grep, AWK and Sed
+## Text Processing with Grep and Sed
 
 **Grep** is a utility to find text on files using regular expressions. It has many flags to expand its functionality, you can learn more on its manual page (man grep). Let see that you want to know if a file (*test-file*) contains a word (*word-test*) and if so, you want to know on what line it's. 
 
@@ -107,6 +107,42 @@ string="TEXT TEXT TEXT HELO TEXT HELLO TEXT"
 echo $string | sed 's/TEXT/text/' # this will replace the first occurrence of TEXT
 echo $string | sed 's/TEXT/text/g' # this will replace all occurrences of TEXT
 ```
+
+## Managing running processes
+A process is an instance of a program running on a computer. From the shell you can execute, pause, stop or kill them. Also, you can put them in the background or bring them to the foreground. When you put a process in the background, you will not see any output or execution on your terminal, whereas if you run it in the foreground you will see the output and you will have to wait for it in order to execute another command on the same shell. A process has a unique identifier called a Process ID (PID). 
+
+### ps command
+The first command we will use to manage running process is ps. With ps you can only list them. On the default output of ps command you will see, among others, the user who execute the program, the process ID (PID). Also, you will see the memory and CPU consumed by the process. 
+
+* `ps u`: list the processes running on your terminal:
+* `ps ux`: list all the processes running on your system for the current user.
+* `ps aux`: list all the processes running on your system for all users.
+
+### top command
+The top command provides a screen-oriented. You can kill process with this command, but also sort them based on your needs.
+
+Once it displays the screen you can use different keys to perform tasks. For example, to sort based on the Memory consumption press the key **M**. To sort by CPU press **P**. Also, if you need to filter the process by user type **U** and enter the username you want to see. Finally, you can kill a process if you type **K** and enter the PID. To find information about the commands type **H**
+
+### Background and foreground
+Sometimes you only have access to a machine via a terminal and you need to execute multiple commands. If you run a program that stays on your main terminal (on foreground), then you won't be able to run another one. To avoid this, you can send the process to the background and you can continue using the terminal. 
+
+To send a process to the background you add the ampersand (&) to the end of the command line. Let's see
+```bash
+sleep 180s &
+```
+this will output the job number surrounded by [] and the PID. You won't see anything else unless the command send data to the stdout. 
+
+To check what commands are running in the background (with their PIDs) use the *jobs* commands as follows:
+```bash
+jobs -l
+```
+
+If you need to bring a process to the foreground, you can use the *fg* command. For example, to bring the second job you can use this:
+```bash
+fg %2
+```
+
+### Killing processes
 
 ## Challenges
 In this section you will find tasks that will help practice the commands we have seen and others.
