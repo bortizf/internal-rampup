@@ -155,6 +155,57 @@ In order to manipulate a process you need to know its PID. Let's say a process h
 - To send a SIGTERM signal: `kill 180` or `kill -15 180`. The default signal that the kill command uses is SIGTERM (15), that's why the previous commands are equivalent.
 - To kill it immediately: `kill -SIGKILL 180`. You can also use the number 9: `kill -9 180`
 
+## Network commands
+On this section you will find commands that will help you troubleshoot networking related issues, get information about your network or other networks, and send request to a DNS server.
+
+### ip command
+This command has a many options, but let's look at the basics ones. In most of the outputs of this command aren't easy to read, that's why we add ` | column -t` at the end of the command line. 
+* `ip link | column -t` will display all your physical and logical network interfaces.
+* `ip addr` will display your physical and logical interfaces, but also it will add the ip address, subnet mask, and broadcast address.
+* `ip route | column -t` will display your routing table.
+
+you can add the `-brief` flag to get a shorter output, e.g. `ip -br link | column -t`
+
+### ping command
+This command will help you when you need to check connectivity between hosts. For example, to check if you have internet connection you can ping to the google's servers 
+```bash
+ping -c 3 www.google.com
+```
+or if you need to check that your VMs are reachable, you can execute: `ping -c 3 10.1.2.3` where 10.1.2.3 is the IP address of other VM.
+
+If you don't add the `-c` flag the execution will not finished until you press Ctrl+C.
+
+### traceroute command
+Use the traceroute command to follow an entire route from the beginning to the end. You can install it on Debian-based systems as follows:
+```bash
+sudo apt-get install inetutils-traceroute
+```
+To find out what hops your packets does to get to google.com:
+```bash
+traceroute -I google.com
+``` 
+some hosts have restrictions and you will see a * instead of their IP address.
+
+### ss command
+With ss command you will get information about the TCP/UDP connections on your system. The `t` flag is for TCP and `u` for UDP.
+* `ss -tln` displays all listening TCP connections. If you add the `n` flag, then it will show you the port number too.
+* `ss -uln` displays all listening UDP connections. 
+* `ss -utln` combines TPC and UDP connections. 
+
+You can use `a` flag to display all connection states. For example, `ss -tan` will display all TCP connections, not just the listening ones.
+
+### dig command
+dig command is used to query DNS servers. It's also used to troubleshoot DNS related issues. You can verify all DNS records. 
+
+to query the google's DNS do this: 
+```bash 
+dig google.com
+```
+this will output an A record by default. If you are interested in other record types, you can pass it as a parameter like this:
+```bash
+dig google.com MX
+```
+Use the `ANY` parameter to dispaly all the record types. Also, you can pass the `+short` flag to get a shorter output: `dig google.com +short`. This command is an improvement to `nslookup` command, if you want to learn about [this](https://www.tecmint.com/8-linux-nslookup-commands-to-troubleshoot-dns-domain-name-server/) is a good place to start.
 
 ## Challenges
 In this section you will find tasks that will help practice the commands we have seen and others.
