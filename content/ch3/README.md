@@ -143,14 +143,29 @@ fg %2
 ```
 
 ### Killing processes
+When a process is running we can send to them signals that can change their behavior. The most common signals that you might send are SIGKILL (9), SIGTERM (15), and SIGHUP(1). Type `man 7 signal` to read about all the availables signals.
+* SIGTERM tries to terminate a process cleanly.
+* SIGKILL kills a process immediately.
+* SIGHUP tells a process to reread its config files.
+* SIGSTOP pauses a process.
+* SIGCONT continues a stopped process.
+
+In order to manipulate a process you need to know its PID. Let's say a process has the 180 ID. To send signals to it, we use the `kill` command as follows:
+
+- To send a SIGTERM signal: `kill 180` or `kill -15 180`. The default signal that the kill command uses is SIGTERM (15), that's why the previous commands are equivalent.
+- To kill it immediately: `kill -SIGKILL 180`. You can also use the number 9: `kill -9 180`
+
 
 ## Challenges
 In this section you will find tasks that will help practice the commands we have seen and others.
 
-1. Display the content of the /etc/passwd, count how many lines it has and sort in a decreasing order (z-a).
-2. Find what is your User ID and Group ID. This information is stored in the /etc/passwd file. Also, find what's the line they are. Of course, you should do this without displaying the file's content.
-3. List files and directories that are hidden on you $pwd. Also, list them by time (use the man page to see what flag you need).
-4. Create a file called *myfile*. Updates its permissions so only your user can read, write, and execute it. 
-5. Create 5 files (f1,f2,...,f5) without having to type 5 times the touch command. 
-6. Move to another location where those 5 files are not. Then do a search to find them, and execute the *ls -l* command to each of those. This should be done with just one command. 
-7. Create the directory d1/d2/d3/foo/d4. If the previous directories don't exist, then they should also be created automatically.
+* Display the content of the /etc/passwd, count how many lines it has and sort in a decreasing order (z-a).
+* Find what is your User ID and Group ID. This information is stored in the /etc/passwd file. Also, find what's the line they are. Of course, you should do this without displaying the file's content.
+* List files and directories that are hidden on you $pwd. Also, list them by time (use the man page to see what flag you need).
+* Create a file called *myfile*. Updates its permissions so only your user can read, write, and execute it. 
+* Create 5 files (f1,f2,...,f5) without having to type 5 times the touch command. 
+* Move to another location where those 5 files are not. Then do a search to find them, and execute the *ls -l* command to each of those. This should be done with just one command. 
+* Create the directory d1/d2/d3/foo/d4. If the previous directories don't exist, then they should also be created automatically.
+* Given the following text "We have 5 days to finish 5 lines of code of the Hi5b project" Replace all "5" by "five", the number must be alone, cannot be in a word.
+* List all process running on your system and sort them by the username that's running each process.
+* Run the gedit program, search for it's PID and send it a signal to stop it. After this, send another one resume its execution.
