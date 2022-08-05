@@ -207,6 +207,44 @@ dig google.com MX
 ```
 Use the `ANY` parameter to dispaly all the record types. Also, you can pass the `+short` flag to get a shorter output: `dig google.com +short`. This command is an improvement to `nslookup` command, if you want to learn about [this](https://www.tecmint.com/8-linux-nslookup-commands-to-troubleshoot-dns-domain-name-server/) is a good place to start.
 
+## Service management
+The main goal of a server is to provide services. A service is a process that runs in the background (AKA daemon), and does not interact with the end-user. On Linux systems services are managed by the Init Daemon. The Init Daemon is the first process started by the kernel. It has a PID 1. It's responsible for launching other processes configured to be started at boot time. Systemd init is the most widely used init daemon today, so we are going to work with this. If you are interested on other init daemons, look for SysVinit, or BSD Init, or Upstart Init.
+
+Systemd is based on a concept called Unit. A Unit is a group consisting of a name, type, and configuration file. There are eight systemd units types, but to work with services we just need the *service unit*. These units are located in `/etc/systemd/system/` and `/lib/systemd/system/`. To list all the service units in your system, type this:
+```bash
+sudo systemctl list-unit-files --type=service
+```
+The *service unit* configuration file contains information such as what other services must be started or which environmental file to use, but also what's the executable of the service. Here is an example of the cups' unit configuration file:
+```bash
+[Unit]
+Description=CUPS Scheduler
+Documentation=man:cupsd(8)
+After=sssd.service
+Requires=cups.socket
+
+[Service]
+ExecStart=/usr/sbin/cupsd -l
+Type=simple
+Restart=on-failure
+
+[Install]
+Also=cups.socket cups.path
+WantedBy=printer.target
+```
+
+You can stop, start, restart, reload or see the status of a service with systemd. To check the status of the cups service, you can do this:
+```bash
+sudo systemctl status cups.service
+```
+This will provide you information about the current status and other important information. Also, in that output you can check if a service unit is enabled or not. An enabled service unit means that the service will be started at boot time.
+
+Similarly, you can start or stop a service:
+```bash
+sudo systemctl stop cups.service
+sudo systemctl start cups.service
+```
+Finally, with the reload command you can tell the service unit to rereads its config filee. The service will not be stop. However, you can also use the restart command to stop and start again a service unit in the event of a failure.
+
 ## Challenges
 In this section you will find tasks that will help practice the commands we have seen and others.
 
