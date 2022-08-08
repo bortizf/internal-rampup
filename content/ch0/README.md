@@ -9,10 +9,10 @@ The rest of the course is structured as follows:
 3. Linux Operating System.
 4. Version Control.
 5. Scripting.
-6. Virtualization and Containerization.
-7. Cloud Computing.
-8. Infrastructure as Code.
-9. Configuration Management.
+6. Configuration Management.
+7. Virtualization and Containerization.
+8. Cloud Computing.
+9. Infrastructure as Code.
 10. Continous Integration and Continous Deployment.
 11. Observability (Questions).
 
