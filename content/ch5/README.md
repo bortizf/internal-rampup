@@ -70,19 +70,55 @@ else
     echo "$n1 is equal to $n2"
 fi
 ```
-Math is a joke for this script. It will output *9 is greater than 314*. Why? because we used the operators to compare strings, so the script is comparing the number lexicographically. In order to fix this we need to change the operators as follows:
-```bash
-n1="314"
-n2="9"
+Math is a joke for this script. It will output *9 is greater than 314*. Why? because we used the operators to compare strings, so the script is comparing the number lexicographically. Try to fix it by yourself.
 
-if [[ $n1 -gt $n2 ]]
-then
-    echo "$n1 is greater than $n2"
-elif [[ $n2 -gt $n1 ]]
-then
-    echo "$n2 is greater than $n1"
-else
-    echo "$n1 is equal to $n2"
-fi
+## Loops
+On Bash there are *While* and *For* loops. Also, there is a variant of the While loop called *Until*, and the For loop comes into two forms.
+* `while` *command*: repeat as long as the *command* runs successfully.
+* `until` *command*: repeat as long as the *command* runs unsuccessfully.
+* `for` *variable* `in` *list*: repeat for each element in the list, setting *variable* to each element in turn.
+* `for ((`*expression*`;`*expression*`;`*expression*`))`: starts evaluating the first arithmetic *expression* and will run as long as the second arithmetic *expression* is successfully, and at the end of each loop evaluates the third *expression* (generally this is an increment to variable in turn)
+
+this is the geneal syntax of a Bash loop: 
+```bash
+# here comes one of the forms we saw, e.g., while *expression*
+while expression
+do
+    commands
+done
 ```
-In this case we get *314 is greater than 9*. So be careful how you test your conditionals.
+
+Let's see an example to print odd numbers less than 20 with all the loop forms:
+
+```bash
+#!/bin/bash
+
+# With a while loop
+(( i=20 ))
+while (( i > 0 ))
+do
+    if [[ $(( $i % 2 )) -ne 0 ]]
+    then
+        echo "$i is an odd number"
+    fi
+    (( i-- ))
+done
+
+# With a for loop
+for i in {20..1}
+do
+    if [[ $(( $i % 2 )) -ne 0 ]]
+    then
+        echo "$i is an odd number"
+    fi
+done
+
+# You can also use the another variant of for loop
+for (( i=20; i>0; i-- ))
+do
+    if [[ $(( $i % 2 )) -ne 0 ]]
+    then
+        echo "$i is an odd number"
+    fi
+done
+```
