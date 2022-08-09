@@ -141,3 +141,36 @@ do
     fi
 done
 ```
+## Arrays
+
+In Bash an array is a numbered list of strings: it maps integers to strings. There are multiple ways to create an array, but the easiest one is this:
+```bash
+#!/bin/bash
+array=("one" "two" "three" "for")
+```
+
+To print an element of it, you can use the `${array[position]}`, for example:
+```bash
+#!/bin/bash
+
+echo "This is the first element of array ${array[0]}" # will output one
+echo "This is the third element of array ${array[2]}" # will output three
+```
+You can print all elements at once with `@`, as follows:
+```bash
+#!/bin/bash
+
+echo "These are all the elements ${array[@]}"
+
+# You can iterate over the elements 
+for num in "${array[@]}"
+do
+    echo "$num is an element of the array"
+done
+
+# Another way to iterate over them
+for ((i=0; i<${#array[@]}; i++))
+do
+    echo "Element at position $i is ${array[i]}"
+done
+```
