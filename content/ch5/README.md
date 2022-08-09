@@ -57,6 +57,7 @@ the comparison operatos `=`, `!=`, `>`, `<` treat their arguments as strings. To
 can you guess what's the output of the following script?
 
 ```bash
+#!/bin/bash
 n1="314"
 n2="9"
 
@@ -71,6 +72,24 @@ else
 fi
 ```
 Math is a joke for this script. It will output *9 is greater than 314*. Why? because we used the operators to compare strings, so the script is comparing the number lexicographically. Try to fix it by yourself.
+
+When you have multiple choices you can use the **Case** statement instead of if and elifs. Let's see an example:
+
+```bash
+#!/bin/bash
+echo "Enter a positive number"
+read NUM
+
+case $NUM in
+    1) echo "one" ;;
+    2) echo "two" ;;
+    3) echo "three" ;;
+    4) echo "four" ;;
+    5) echo "five" ;;
+    *) echo "another number greater than 5" ;;
+esac
+``` 
+It will try to match the first entry, then the second and so on. When it matches on successfully, it will stop. The `*` character matches any case that has not been caught by the other choices.
 
 ## Loops
 On Bash there are *While* and *For* loops. Also, there is a variant of the While loop called *Until*, and the For loop comes into two forms.
