@@ -175,6 +175,28 @@ do
 done
 ```
 
+## Functions
+Bash functions are a way to group commands for later execution using a unique name for it. This is the syntax for them:
+
+```bash
+#!/bin/bash
+
+function_name () {
+    // body
+}
+```
+Functions can receive parameters and you do not need to specify it. The parameters can be accessed with `$n` notation, they become positional parameters. Let's see an example:
+```bash
+#!/bin/bash
+create_two_files () {
+    touch $1 $2
+}
+
+# Invoke the function with two params
+create_two_files f1 f2
+```
+If you define a variable inside a function, it will be a global variable unless you specify it with the `local` keyword.
+
 ## Challenges
 * Display only the even numbers from 1 to 100.
 * Compare natural numbers and display "X is greater than Y", "X is equal to Y" or "X is less than Y".
