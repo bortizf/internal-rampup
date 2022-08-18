@@ -8,3 +8,10 @@ Virtualization is a process that allows for more efficent utilization of physica
 
 
 ## Benefits of virtualization
+
+- **Resource efficiency**: before virtualization, each application server required its own dedicated physical CPU, RAM, and devices. Virtualization lets you run several applications on a single physical computer.
+- **Easier management**: the sofware-defined VMs can be control via a central place. Also you can define templates for VMs, so that you can install services repeatedly and consistently. 
+- **Minimal downtime**: if something goes down, admins can run multiple redundant VMs and failover between them. Doing this with physical servers is more expensive.
+- **Faster provisioning**: buying, installing, and configuring hardware for each application is time-consuming. Provisioning virtual machines to run all your applications is significantly faster.
+
+## What are hypervisors?
