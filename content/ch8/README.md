@@ -80,7 +80,7 @@ Cloud Providers with the experience!
 
 Before starting, remember to always tag all your resources the following way!
 
-![](./EC2/Tags.png)
+![](imgs/EC2/Tags.png)
 
 Don't forget to choose resources that are available on the AWS Free tier! they are more than enough for you to complete the Ramp Up and that
 way you'll save costs to the company! (you can see if a resource is on the Free tier if it has the work **Free tier eligible**).
@@ -120,16 +120,16 @@ Based on the "size" of an instance, it will be more or less expensive.
 For provisioning an EC2 Instance automatically (like on the Virtualization chapter) make sure you add your provisioning script on the user data
 section while creating your EC2 Instance:
 
-![](./EC2/User data 1.png)
+![](imgs/EC2/User_data_1.png)
 
-![](./EC2/User data 2.png)
+![](imgs/EC2/User_data_2.png)
 
 This is how you will see instance properties on AWS (EC2 Dashboard), you can see the Public IP which you can use to access your running applications 
 clicking on **open address**, if you want to connect to your instance, you can click on the Connect button:
 
-![](./EC2/Connect 1.png)
+![](imgs/EC2/Connect_1.png)
 
-![](./EC2/Connect 2.png)
+![](imgs/EC2/Connect_2.png)
 
 Here we have 2 options for connecting to your instance!
 
@@ -139,7 +139,7 @@ You can connect using an SSH Client, Windows and Linux CLI already have an SSH C
 the **Example** section (remember to have your Key file on the same directory where you execute the command or give the full path of the file)
 and run it on your CLI!
 
-![](./EC2/Connect 3.png)
+![](imgs/EC2/Connect_3.png)
 
 **Option 2**
 
@@ -154,7 +154,7 @@ for instance, you would want your IP for being the only one allowed to enter thr
 Instance, but if you're going to run an application on your instance, you would want your instance to
 be open to the internet through the HTTP protocol on the port your application is listening on for requests.
 
-![](./EC2/Security group creation.png)
+![](imgs/EC2/Security_group_creation.png)
 
 When creating a security group you need to be careful with the rules you have, usually these configurations are more than enough to run a simple application
 and allowing access from the internet:
@@ -233,7 +233,7 @@ There are four types of load balancers on AWS:
 * **Application Load Balancer (ALB)**: This load balancer functions at the application layer of the Open Systems Interconnection (OSI) Model for networks modeling, 
 you can see it here:
 
-![](./OSI Model.png)
+![](imgs/OSI_Model.png)
 
 Application Load Balancers allow you to define how you will route your application's traffic and where based on a set of rules, this kind of load balancers
 are context-aware and can direct requests based on a single or a combination of variables, because it works on the application layer, it can load balance
@@ -242,17 +242,17 @@ routing checking the contents of the HTTP request header to determine where to r
 
 Here's an AWS diagram that briefly explains an Application Load Balancer functionalities:
 
-![](./ALB.png)
+![](imgs/ALB.png)
 
 Don't worry if this seems a bit confusing! once you start working with it, you'll understand it better! Here's an example of an ALB creation on an ASG:
 
-![](./ALB creation.png)
+![](imgs/ALB_creation.png)
 
 * **Gateway Load Balancer (GWLB)**: It helps you easily deploy, scale and manage third-party virtual appliances, giving you a gateway for distributing traffic
 across multiple virtual appliances while scaling them up or down, based on demand. You can find these third-party virtual appliances on AWS
 Marketplace
 
-![](./GWLB.png)
+![](imgs/GWLB.png)
 
 * **Network Load Balancer (NLB)**:  This load balancer works at the transport layer, meaning that it can only perform distribution of traffic based on network
 variables, such as IP address and destination ports, it can't take anything of the application layer like content type, cookie data, custom headers, user
@@ -262,7 +262,7 @@ This kind of load balancers can't assure high availability for the application, 
 no awareness of the application at all, it determines availability based on the ability of a server to respond to IMCP ping command, on the other hand, 
 Application Load Balancers can verify that the response content of a request is expected based on the input parameters.
 
-![](./NLB.png)
+![](imgs/NLB.png)
 
 **Target groups, listeners and rules**
 
