@@ -78,6 +78,13 @@ Let's get to work! AWS has a lot of services that you can use for running your a
 the most common ones that will show you how we can run a simple application, you will learn about the whole toolset of AWS and other
 Cloud Providers with the experience!
 
+Before starting, remember to always tag all your resources the following way!
+
+![](.\EC2\Tags.png)
+
+Don't forget to choose resources that are available on the AWS Free tier! they are more than enough for you to complete the Ramp Up and that
+way you'll save costs to the company! (you can see if a resource is on the Free tier if it has the work **Free tier eligible**).
+
 **EC2 Instances**
 
 Amazon Elastic Compute Cloud (EC2) is basically a service that offers a virtual machine hosted on a Server on Amazon Data Centers, you
@@ -110,6 +117,35 @@ we have some examples:
 
 Based on the "size" of an instance, it will be more or less expensive.
 
+For provisioning an EC2 Instance automatically (like on the Virtualization chapter) make sure you add your provisioning script on the user data
+section while creating your EC2 Instance:
+
+![](.\EC2\User data 1.png)
+
+![](.\EC2\User data 2.png)
+
+This is how you will see instance properties on AWS (EC2 Dashboard), you can see the Public IP which you can use to access your running applications 
+clicking on **open address**, if you want to connect to your instance, you can click on the Connect button:
+
+![](.\EC2\Connect 1.png)
+
+![](.\EC2\Connect 2.png)
+
+Here we have 2 options for connecting to your instance!
+
+**Option 1**
+
+You can connect using an SSH Client, Windows and Linux CLI already have an SSH Client integrated, you just need to copy the command showed on
+the **Example** section (remember to have your Key file on the same directory where you execute the command or give the full path of the file)
+and run it on your CLI!
+
+![](.\EC2\Connect 3.png)
+
+**Option 2**
+
+This option allows you to access to your instance CLI through your browser, you just need to click on the **connect** button, and it will take
+you to your CLI!
+
 **Security Groups**
 
 Security groups are a set of rules that will define a "firewall" for your EC2 Instances, here you will
@@ -117,6 +153,15 @@ define which IPs will be allowed to enter the instance and which protocol will t
 for instance, you would want your IP for being the only one allowed to enter through SSH on your EC2
 Instance, but if you're going to run an application on your instance, you would want your instance to
 be open to the internet through the HTTP protocol on the port your application is listening on for requests.
+
+![](.\EC2\Security group creation.png)
+
+When creating a security group you need to be careful with the rules you have, usually these configurations are more than enough to run a simple application
+and allowing access from the internet:
+
+* **Allow HTTPs and HTTP traffic from the internet**, this will enable port 80.
+* be careful where you enable SSH traffic, you should choose **My IP or Custom** options only, for setting up specific IPs that will have access to
+your instance, allowing all IPs to log in through SSH to your instance is a bad practice and a potential security flaw!
 
 **Amazon VPC**
 
@@ -148,7 +193,7 @@ You can choose from seven different engines:
 * Oracle
 * SQL Server
 
-**Amazon EC2 Auto Scaling**
+**Amazon EC2 Auto Scaling groups (ASG)**
 
 Amazon EC2 Auto Scaling allows you to create a High Availability model to your servers, scaling up or down computing resources based on
 a specific condition, this is done through Auto Scaling groups, which are groups of instances that you want to be replicated (scaling up)
@@ -158,7 +203,10 @@ requests on your application and your server's usage percent is over 80%, then y
 resources automatically in order to keep a good performance on your application, the same can be applied afterwards, if the server's 
 usage percent is below 40% you can configure your Auto Scaling group to scale down resources automatically.
 
-In order to set up an Auto Scaling group you need to configure a Launch Template and a Load Balancer.
+In order to set up an Auto Scaling group you need to configure a Launch Template, a Load Balancer and its target groups with their listeners.
+
+If you want to learn more about how Auto Scaling groups work and how to create them check the getting started documentation from AWS:
+https://docs.aws.amazon.com/autoscaling/ec2/userguide/get-started-with-ec2-auto-scaling.html
 
 **Launch Templates and Launch Configurations**
 
@@ -196,7 +244,9 @@ Here's an AWS diagram that briefly explains an Application Load Balancer functio
 
 ![](.\ALB.png)
 
-Don't worry if this seems a bit confusing! once you start working with it, you'll understand it better!
+Don't worry if this seems a bit confusing! once you start working with it, you'll understand it better! Here's an example of an ALB creation on an ASG:
+
+![](.\ALB creation.png)
 
 * **Gateway Load Balancer (GWLB)**: It helps you easily deploy, scale and manage third-party virtual appliances, giving you a gateway for distributing traffic
 across multiple virtual appliances while scaling them up or down, based on demand. You can find these third-party virtual appliances on AWS
@@ -214,297 +264,57 @@ Application Load Balancers can verify that the response content of a request is 
 
 ![](.\NLB.png)
 
-## How to create an EC2 Instance?
+**Target groups, listeners and rules**
 
-For creating an EC2 Instance, go to AWS management console, and search for the EC2 service:
+Target groups are used for routing requests sent to a load balancer to one or more registered targets, to do this you have to specify listener rules, which
+would be, for example, receiving a requests to port 80 with some specific headers. When that condition is met, traffic is forwarded to a specific target
+group.
 
-![](.\EC2\EC2 1.png)
-
-Then click on Instances, there you can see all the instances that have been created by other trainees,
-including yours:
-
-![](.\EC2\EC2 2.png)
-![](.\EC2\EC2 3.png)
-
-We can see several points here:
-1. The name of your instance (you can create it without a name if you want to)
-2. The ID of your instance, this is how you will identify your instance, if you want to see your instance properties and see how to
-connect to it through ssh you just need to click your instance ID
-3. The state of your instance, if it's on **running** then it means that your instance is up, if it's on stopped then your instance is down
-4. The public IP of your instance, this is how you will be able to enter to your applications on your browser
-
-Click on **Launch instances** to create your EC2 Instance!
-
-![](.\EC2\EC2 4.png)
-
-We have several things to look at here, first, on Name and tags, you have to define a tag for who is the responsible for creating a
-specific resource and the project it belongs to, this is required to create resources on our AWS training account, but don't forget it!
-it is a good practice to always tag your resources with valuable information, so you can trace who created an instance and what is the purpose
-of it, here's an example on how you should tag your instance
-
-![](.\EC2\EC2 4.1.png)
-
-You can also add a Name tag for giving your instance a custom name, as we saw earlier, don't forget to tag Instances, Volumes and Network
-interfaces!
-
-For selecting an OS for your Instance, you can choose any OS you want, we recommend using Amazon Linux 2 or Ubuntu because they're on the Free tier
-(you can see if a resource is on the Free tier if it has the work **Free tier eligible**)
-
-![](.\EC2\EC2 5.png)
-
-For the instance type, you can use a t2.micro instance, again because it's free! and usually for running simple applications it's more than enough
-with its resources, in case you need a more powerful instance you can try choosing a t2.small or t2.medium, but remember these two instance types
-do have a cost so use it **only** if required.
-
-You need a Key Pair in order to be able to log in into your instance via SSH, if you already have a Key Pair you can choose it clicking on the
-dropdown, if not you can create a new key pair.
-
-![](.\EC2\EC2 6.png)
-
-You just need to give it a name, you can leave the other fields as default, a file will be downloaded to your PC, **DON'T LOSE THIS FILE!** if you
-lose it you won't be able to log in on your instance (or instances if you created them with the same Key Pair) ever again.
-
-![](.\EC2\EC2 7.png)
-
-Now you need to configure a firewall for your instance! you can create it with this screen or click on Edit for seeing advanced settings!, on this
-screen you just need to click on **Create security group** and checking the boxes for **Allow HTTPs and HTTP traffic from the internet**, be careful
-though! this will enable port 80, if you have your application running on a different port you'll need to modify these network settings again. Also,
-be careful where you enable SSH traffic, you should choose **My IP or Custom** options only, for setting up specific IPs that will have access to
-your instance, allowing all IPs to log in through SSH to your instance is a bad practice and a potential security flaw!
-
-![](.\EC2\EC2 8.png)
-
-You'll see this screen if you click on Edit for seeing advanced networking settings, you should choose a public subnet if you want to log in through
-SSH on your instance! if you choose a private subnet you won't be able to access it as only other instances belonging to that subnet will have access
-to your instance. It's a good practice to provide useful names and descriptions to your security groups, if you leave the default names you will
-struggle on looking for a specific security group! You can add rules on the blue square section, just as we can do with the previous screen!
-
-![](.\EC2\EC2 9.png)
-
-Here you can modify your storage settings, usually these default values are more than enough for our training exercises, but you can add more or
-less storage if you need it.
-
-With all these configurations we are good to go for creating our instance! but if you want to add a provisioning script just as we did with our
-Virtual Machines on Vagrant you can click on Advanced details!
-
-![](.\EC2\EC2 10.png)
-
-If you go down all the way you'll find this square called **User data**, paste your script here and leave the checkbox unmarked so AWS will take
-care of encoding your script automatically, this will provision your instance just as we did with Vagrant!
-
-Now our instance has been created! if you return to the instances page you will see your instance there! wait a few minutes until the status is
-on running and then you can access it clicking on the Instance ID!
-
-![](.\EC2\EC2 11.png)
-
-You will see the details of your instance here, you can see the Public IP which you can use to access your running applications clicking on 
-**open address**, if you want to connect to your instance, you can click on the Connect button.
-
-![](.\EC2\EC2 12.png)
-
-Here we have 2 options for connecting to your instance!
-
-**Option 1**
-
-You can connect using an SSH Client, Windows and Linux CLI already have an SSH Client integrated, you just need to copy the command showed on
-the **Example** section (remember to have your Key file on the same directory where you execute the command or give the full path of the file)
-and run it on your CLI!
-
-![](.\EC2\EC2 13.png)
-
-**Option 2**
-
-This option allows you to access to your instance CLI through your browser, you just need to click on the **connect** button, and it will take
-you to your CLI! 
-
-Now you can explore and work with your EC2 Instance! don't forget to erase it once you finish using it!
-
-## How to create an Auto Scaling Group (ASG)?
-
-For creating an Auto Scaling group, once again, go to AWS EC2 dashboard!
-
-![](.\EC2\EC2 1.png)
-
-![](.\ASG\AS 1.png)
-
-Look at the dashboard at the left, on the blue square, go down all the way and select the Auto Scaling Groups option, here we can see some
-interesting things that we need to have in mind
-
-1. Your Auto Scaling Group name, this way you'll be able to identify your ASG, by clicking it you can see your ASG details.
-2. This is the launch template you used for creating your ASG, by clicking it you can see your launch template details.
-3. The number of instances that your ASG currently has, this is the main point for ASGs, scaling up or down the number of instances on
-your ASG is how AWS scales the resources of your application automatically.
-
-For creating an Auto Scaling Group you just need to click on Create an Auto Scaling group button!
-
-![](.\ASG\AS 2.png)
-
-Here you need to give your ASG a name and, one of the most important parts, selecting a launch template, if you don't have one you can click on
-the Create a launch template button! we'll see the whole walkthrough for creating a launch template and then finishing creating our ASG.
-
-![](.\ASG\AS 3.png)
-
-Don't forget to give your Launch template a useful name and description! this is how you will differentiate your Launch template from other ones, 
-you can explain briefly which is the purpose of your Launch template with the description, also, don't forget to add tags as always!
-
-You can choose a source template for using it as a base for creating a new Launch template, if you want to create it from scratch (just as we'll do it
-on this walk through) leave it as default.
-
-![](.\ASG\AS 4.png)
-
-You can select the OS your instances will have clicking on the Quick Start tab and selecting the OS of your choice, we recommend using Amazon Linux 2 or
-Ubuntu because they are widely used and included on AWS Free tier!
-
-![](.\ASG\AS 5.png)
-
-Here you can select the type your instances will be when created automatically, all instances have the same type, but you scale up or down resources
-creating more or less instances, we'll see how AWS links these instances to work together as a whole in a moment, remember to use a t2.micro instance or
-instances that are included on AWS Free tier as they will have a cost if not included.
-
-Don't forget to choose the key pair your instances will use! you can use the same key pair we created when creating a single EC2 Instance, or, if you want,
-you could create a brand-new key pair for your Launch template.
-
-![](.\ASG\AS 6.png)
-
-It's time to configure one of the most important things on a Launch template, the Network settings! First, don't select a subnet at the beginning as
-that is not applicable for EC2 Auto Scaling, we'll select that later when creating our ASG.
-
-Now, let's create a security group for our launch template! you can select the one we created when creating our EC2 instance too if you want to,
-it's the same procedure we showed before, so we'll not get into details this time.
-
-Once our security group is created and assigned, let's click on advanced network configuration, go ahead and create a network interface for
-your instances! we can leave most of the fields as default, let's enable the Auto-assign public IP option and the delete on termination field,
-this is for deleting your network interfaces once the instance is deleted, that way we are not going to create a lot of network interfaces and 
-leave them abandoned once the instances are deleted by the auto scaling group.
-
-![](.\ASG\AS 7.png)
-
-We're almost done with our launch template! we need to set up three more items! let's go ahead with the storage first, click on Add new volume!
-
-![](.\ASG\AS 8.png)
-
-First, let's choose a name for your volume, it doesn't really matter which name you choose, but this is required for identifying your volume.
-You can modify the volume size if you want to, but the default size is more than enough for our training! also, you can modify the volume type
-if you want, by default AWS assigns a SSD storage for your instances, but, if you want more storage and fewer costs you could use an HDD.
-
-Make sure you choose yes on Delete on Termination option, this way if an instance is deleted the volume will be deleted too, it's possible that
-in some cases you don't want to delete the volume after the instance is deleted if you want to keep the information, but, keep in mind that you
-should decide what to do with these volumes later, it's not a good idea to leave all those volumes alone without use them, that could cause more
-costs, also, it's a good idea to encrypt your volumes, you could enable this option if you want to, but you'll need a KMS key for doing this, on
-this training we're not going to enable this option.
-
-![](.\ASG\AS 9.png)
-
-Now it's time to create the tags! just as usual, create tags for the responsible of the resource and the project it's assigned, don't forget to
-create the tags for Instances, Volumes and Network Interfaces!
-
-![](.\ASG\AS 10.png)
-
-Now, for the advanced settings, scroll down all the way until you find the user data and add here your provisioning script for your instances,
-this time is important you add a provisioning script, if you don't do this your instances will be created only with the OS you selected, you'll
-need your instances to be created with your application running and ready to go, so you don't need to configure the instances each time they
-are created.
-
-We are done with our launch template! now let's continue configuring our Auto Scaling group.
-
-![](.\ASG\AS 11.png)
-
-Let's choose the Launch template you just created, launch templates can have different versions, you can specify which version you want to use
-here, as we just created this launch template, you can leave the version as default!
-
-![](.\ASG\AS 12.png)
-
-For the networking configuration you should select the ramp_up_training VPC, and a private and public subnet, so you have access to them if needed.
-
-![](.\ASG\AS 13.png)
-
-Here you can modify the requirements of your instance type, we defined how we wanted our instances on the launch template so we can skip this step
-
-![](.\ASG\AS 14.png)
-
-This part is pretty important, as the load balancer will be the responsible of distribute our application's traffic between all the instances
-you'll have on your ASG, if you don't have a load balancer, you're not going to be able to coordinate your instances to work as a whole and
-single application, the main purpose of the load balancer is, as it's name says, balance the traffic load between all the instances, so you
-don't have instances with a lot of usage while other instances are not being used at all.
-
-Let's go ahead and create a new load balancer here.
-
-![](.\ASG\AS 15.png)
-
-For choosing a kind of load balancer, you could use a network load balancer or an application load balancer if you want to, we recommend using an
-application load balancer because it allows you to redirect traffic depending on the HTTP request headers, which could be useful depending on the
-microservice you want to use.
-
-Give your load balancer a name and choose if you want it to be internal facing or internet facing, internal load balancers are useful for distributing
-load between backend services, traffic from real users is not going to enter directly through here, for now, we'll use an internet-facing load balancer,
-so you can redirect requests directly from your browser through your target group.
-
-For creating the target group choose the option "Create a target group" and give it a name, you can modify the rules after creating the load balancer,
-but basically, if you receive an HTTP request for your instance's port 80, you can choose where to redirect it.
-
-Don't forget to tag your load balancer as always!
-
-![](.\ASG\AS 16.png)
-
-Here you can modify the amount of EC2 instances you want to have on your Auto Scaling group, a desired capacity, which will be the amount of instances
-the ASG will try to have most of the time, a minimum quantity of instances to have always running and a maximum capacity that the ASG won't exceed when
-scaling up resources.
-
-You can set up your ASG to have a minimum quantity of 1, and a maximum quantity of 2, so you can increase the quantity if you want, and a desired
-quantity of 1.
-
-![](.\ASG\AS 17.png)
-
-This section allows you to define when you want to scale up or down your resources, meaning increasing or decreasing the amount of instances you have
-on your ASG, you can use the average CPU utilization for this, but remember there are more metrics that you can use to decide when you want to scale
-your resources, set the limit of percentage you'll allow before scaling up resources, usually a good percentage is 80% but this depends on the situation,
-it's up to you which percentage you'll use.
-
-![](.\ASG\AS 18.png)
-
-Here you can check the instance scale-in protection, just to make sure that new instances are protected from scale in by default.
-
-![](.\ASG\AS 19.png)
-
-On this example we're not going to set up any notifications, but this is an important feature of AWS, this way you'll be notified every time your ASG
-scale up or down resources, so you are aware of how much computing resources your application is using and when it changes, thanks to this you can have
-full control of the costs of your infrastructure.
-
-![](.\ASG\AS 20.png)
-
-As usual, don't forget to add tags!
-
-Congratulations! now you have created an Auto Scaling group successfully!
+You can read more about target groups here:
+https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
 
 ## Challenges
 
 Let's get to work! you will find some tasks in this section where you can practice what we learned on this chapter
 
-**1.** Log in on AWS management console with your training account, if you don't have one please reach out to your trainer, 
+Log in on AWS management console with your training account, if you don't have one please reach out to your trainer, 
 he should be able to give you the credentials.
 
-**2.** Create an EC2 Instance.
+### Cloud Infrastructure diagramming
 
-**3.** Choose the AMI (OS) you want to use on your instance, We suggest using Amazon Linux 2 or Ubuntu.
+Before we start working on AWS, your first task will be making a Diagram about how your cloud infrastructure will be for
+running your application with High Availability using all the components we saw on this chapter, you can use the tool of
+your choice, like draw.io, Microsoft Visio, etc.
 
-**4.** While setting up your instance, on the security group, create ingress rules for allowing your IP to enter to your
-instance through SSH (usually that is on port 22) and allowing all IPs to enter your instance on port 80 through
-HTTP for allowing access to your application (frontend).
+Once you finish diagramming show it to your trainer and discuss together about how you will implement this infrastructure.
 
-**5.** Leave storage settings and networking settings with default values.
+### Running your App with EC2 Instances
 
-**6.** Don't forget to tag your instance and your security group.
+First, let's get a little warmed up with AWS running your app with only EC2 Instances, just as we did on the previous chapter
+with Vagrant:
 
-**7.** Access to your instance through SSH, you can do this from AWS website or on your pc using the .pem Key you got
-while creating your instance.
+**1.** Create two EC2 Instances, just as we did with vagrant, one for the backend, another for the frontend.
 
-**8.** Upload your application files through this command "-----TODO-----".
+**2.** Choose the AMI (OS) you want to use on your instance, We suggest using Amazon Linux 2 or Ubuntu.
 
-**9.** Run your application just as you did on the previous chapter while provisioning your Virtual Machine.
+**3.** Set up your instances so your backend instance belongs to a private subnet and the frontend belongs to a public
+subnet, that way your instances should be able to communicate but you shouldn't be able to log in through ssh to your
+backend instance (you can access to it through your **frontend** instance logging in through ssh to your **backend** instance).
 
-**10.** Check that your app is running and try to access it through the public IP and port you assigned.
+**4.** Provision your instances and run your application just as you did on the previous chapter while provisioning your Virtual Machines.
 
-TODO: añadir load balancers, como crear autoscaling groups y load balancers con imagenes, solicitar diagramar la infra a crear,
-poner la opción para hacer una instancia para el front y otra para el back o una instancia por microservicio.
+**5.** Check that your app is running and try to access it through the public IP and port you assigned for the frontend, double check that
+everything is running ok.
 
-Añadir referencias y páginas con más información sobre los elementos de cloud
+### Running your App with High Availability
+
+Now that you warmed up let's start with a High Availability infrastructure! now you need to build the same infrastructure you designed on
+the diagram, with Auto Scaling groups, Load balancers, Launch templates, and Target groups.
+
+You need to configure your Auto Scaling group for provision automatically your frontend and backend instances, each time an instance is
+created, it has to be able to configure itself and run your application without you to move a single finger, once you finish creating
+your Auto Scaling group, verify that your app is running ok, and then delete one instance of your Auto Scaling group and check if its
+created again and being provisioned correctly so your app keeps working even if an instance gets deleted.
+
+Once you created the load balancers, create a rule for redirecting a request from port 80 of your frontend instance and sending it
+to your application's home page directly without needing to add the port on the browser's url.
