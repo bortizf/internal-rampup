@@ -284,7 +284,10 @@ he should be able to give you the credentials.
 
 Before we start working on AWS, your first task will be making a Diagram about how your cloud infrastructure will be for
 running your application with High Availability using all the components we saw on this chapter, you can use the tool of
-your choice, like draw.io, Microsoft Visio, etc.
+your choice, like draw.io, Microsoft Visio, etc. 
+
+Use the AWS Calculator to create an estimate of how much this cloud infrastructure will cost monthly.
+https://calculator.aws/#/
 
 Once you finish diagramming show it to your trainer and discuss together about how you will implement this infrastructure.
 
@@ -298,7 +301,7 @@ with Vagrant:
 **2.** Choose the AMI (OS) you want to use on your instance, We suggest using Amazon Linux 2 or Ubuntu.
 
 **3.** Set up your instances so your backend instance belongs to a private subnet and the frontend belongs to a public
-subnet, that way your instances should be able to communicate but you shouldn't be able to log in through ssh to your
+subnet, that way your instances should be able to communicate, but you shouldn't be able to log in through ssh to your
 backend instance (you can access to it through your **frontend** instance logging in through ssh to your **backend** instance).
 
 **4.** Provision your instances and run your application just as you did on the previous chapter while provisioning your Virtual Machines.
