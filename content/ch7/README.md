@@ -15,3 +15,12 @@ Virtualization is a process that allows for more efficent utilization of physica
 - **Faster provisioning**: buying, installing, and configuring hardware for each application is time-consuming. Provisioning virtual machines to run all your applications is significantly faster.
 
 ## What are hypervisors?
+A hypervisor is a software that separates the physical resources from the virtual environments. There are two types of hypervisors:
+* **Type 1 hypervisors** interact with the underlying physical resources, replacing the traditional operating system altogether. They most commonly appear in virtual server scenarios. For example, KVM, XEN or Hyper V.
+* **Type 2 hypervisors** run as an application on an existing OS. For example, VirtualBox or VMWare Workstation.
+
+## Types of virtualization
+There are many type of virtualization, we will discuss the most common ones: 
+* **Desktop virtualization** lets you run multiple desktop operating systems, each in its own VM on the same computer. There are two types of desktop virtualization: *Virtual desktop infrastructure (VDI)* and *local desktop virtualization*. 
+* **Network virtualization** abstracts hardware elements and functions (e.g., connections, switches, routers, etc.) and abstracts them into software running on a hypervisor. Types of network virtualization includes *software-define networking (SDN)* and *network function virtualization (NFV)*
+* **Storage virtualization** enables all the storage devices on the network to be accessed and managed as a single storage device called shared pools.
