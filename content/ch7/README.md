@@ -24,3 +24,11 @@ There are many type of virtualization, we will discuss the most common ones:
 * **Desktop virtualization** lets you run multiple desktop operating systems, each in its own VM on the same computer. There are two types of desktop virtualization: *Virtual desktop infrastructure (VDI)* and *local desktop virtualization*. 
 * **Network virtualization** abstracts hardware elements and functions (e.g., connections, switches, routers, etc.) and abstracts them into software running on a hypervisor. Types of network virtualization includes *software-define networking (SDN)* and *network function virtualization (NFV)*
 * **Storage virtualization** enables all the storage devices on the network to be accessed and managed as a single storage device called shared pools.
+
+## Challenge
+In this section you will have to create a complete virtual environment to run each microservice in different VMs. This should be done using a tool called Vagrant or any other tool to create VMs in a declarative way. Vagrant is a command-line utility for building and managing virtual environments. It creates, starts up, provisions, and destroys VMs easily. Each VM should be provision to execute the microservice you want to run in it. The provisioning should be done via scripting or tools like Ansible, Puppet, among others. You should use Git to track the changes on the infrastructure. While doing this challenge, try to answer these questions:
+* What are the advantages of using a declarative tool to create the virtual environment?
+* Are you scripts handling idempotence?
+* Can you automate the process of provision and running each microservice? For example, that after the *vagrant up* command finishes all the application is running.
+
+[Here](https://www.youtube.com/watch?v=sr9pUpSAexE) you can find a video tutorial that explains the basics of Vagrant. Also, the [getting started](https://learn.hashicorp.com/collections/vagrant/getting-started) documentation may help you.
