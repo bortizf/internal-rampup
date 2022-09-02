@@ -3,7 +3,7 @@
 Great work! you've almost finished the Ramp Up for starting working as a DevOps Engineer! on this chapter we are going to cover one of the most important
 elements of the DevOps Culture, which are the Continuous Integration/Continuous Deployment processes.
 
-![](./imgs/cicd.jpg)
+<img src="./imgs/cicd.jpg" alt="cicd-processes" width="700">
 
 As you may know, an Application's development has a lot of items to cover, if a team is working on developing a quality application, in addition to work
 on developing application's features, they have to create tests for making sure that everything is working ok, and it doesn't have any bugs, they have to
@@ -18,21 +18,41 @@ raised up above, let's see how.
 
 ## What is Continuous Integration (CI)? 
 
-Continuous Integration is the process responsible for being constantly testing your application, if you add a change
+Continuous Integration is the process responsible for being constantly testing your application, this requires you to push changes constantly, if you add a change
 to your code, Continuous Integration will build your application and test it, this way you'll make sure that everything is working ok, if something is broken,
 thanks to Continuous Integration you'll find that error faster, if you're not constantly testing, errors can appear once you deploy your application to
 production, reducing the application's quality and worsening the final client experience. The faster you find an error, the faster you can fix it, and the
 better your application will be.
 
-## What is Continuous Deployment (CD)?
+## What is Continuous Delivery (CD)?
 
-Continuous Deployment is the process that follows Continuous Integration, after you have implemented your application's feature correctly, and make sure
-that everything is working ok testing constantly with every change you made, what should we do? That's right! we need to deploy our application! 
-Continuous Deployment is the responsible for deploying your application to a cloud provider, and running monitoring processes if there are any configured
-in order to keep an eye on your application's performance.
+Continuous Delivery is an extension of CI, after you have implemented your application's feature correctly, and make sure
+that everything is working ok testing constantly with every change you made, what should we do? That's right! we need to deploy our application!
+Continuous Delivery will deploy your application to a cloud provider on non-production environments, and even run monitoring processes if there are any 
+configured in order to keep an eye on your application's performance. CD can take care of the creation of production releases too, but it stops there.
+With Continuous Delivery deployments to production environments are not done automatically, an approval is required before production deployments, but once 
+this deployment is approved, you should be able to deploy with just a click to production environments.
+
+## What is Continuous Deployment (CDP or CD)?
+
+Continuous Deployment, also called CD, is pretty similar to Continuous Delivery, the main difference here is that all the process is fully automated,
+included deployments to production environments. This final step of deploying to production differ mostly because of business reasons, some business requires
+an approval for deploying to production and don't allow these deployments to be done automatically.
+
+##
 
 Those were the main purpose of CI/CD Processes, however, their implementation can differ among developers, you can add as many "middle" stages as you want,
 if you want to add a **stage** for scanning your code with a static code analyzer on your CI implementation, you can do it.
+
+Remember, DevOps is a Culture, meaning that, for these processes to work correctly, all your team needs to collaborate and work aligned with this culture and
+their purposes and processes, for CI/CD to work and to be effective and continuous, developers need to push their changes constantly, at least once per day,
+with more pushes per day, the more continuous your development will be, and the better your application's quality will be.
+
+Finally, a little note here, CI/CD Processes are part of a bigger picture, there's no point on implement a CD without CI for instance, their purpose is
+to facilitate the development, improve the application's quality and save money and time by preventing and not regretting, here's a diagram that can
+help you understand the difference on these processes a better:
+
+![](./imgs/cicd2.png)
 
 Now, you may have wondered until this point, how can I create my own CI/CD processes? there's a word for that, **Pipelines** 
 
@@ -107,7 +127,11 @@ For the challenges, let's focus first on the CI, and then on the CD.
 1. **Design and create a diagram of your CI Pipeline**: Before we start throwing code, let's internalize the concepts first, create a diagram
 in a way that you can identify each stage that makes up your pipeline and their internal steps.
 2. **Choose an Automation Server**: We saw one of the most used Automation Servers on this chapter, give them a look and choose the one you like most!
-3. **Implement the pipeline you created in the Automation Server you chose.**
+3. **Implement the pipeline you created in the Automation Server you chose.**: Let's implement the main steps of the CI process that we saw on the diagram before!
+   1. **Build your application**: remember that you created several dockerfiles before for your application? create your pipeline so you build your docker images.
+   2. **Upload your docker image to your docker registry**: You need an account on DockerHub for this step, push your docker images to DockerHub for pulling them later.
+   3. **Execute your application's tests!**: Some services of your application have tests, execute them! add errors to your code and test how your pipeline should
+   fail if a test doesn't pass successfully, remember to **fail fast**.
 4. **Configure your application's repository to have a webhook to your pipeline and trigger builds on each commit.**
 5. **Configure your Automation Server to use a slave node for executing your pipelines**: Instead of doing it all on the same instance, create another
 instance on AWS and link it with your Automation Server instance to use it for running builds.
@@ -115,9 +139,15 @@ instance on AWS and link it with your Automation Server instance to use it for r
 ### CD
 
 1. **Design and create a diagram of your CD Pipeline**: Just as you did with your CI Pipeline.
-2. **Implement the pipeline you created in the Automation Server you chose.**
+2. **Implement the pipeline you created in the Automation Server you chose.**: Now let's implement the deployment process!
+   1. **Set up your infrastructure**: create an EC2 Instance and install docker on it. 
+   2. **Pull your docker image**.
+   3. **Run your containers with docker!**: You can do it as we did on the virtualization chapter, having one instance per tier or service, but instead
+   of running them directly, use Docker for running containers on each instance.
 3. **Choose the policies of when you are going to deploy**: Similar to when we configure our webhook on the application's repository, for example, 
 you may want to deploy each time a PR is merged, who should be allowed to deploy on an organization and on which environments? 
-4. **Research and learn about deployment strategies.**
-5. **Implement your deployment solution.** Get creative! the sky is the limit! you can implement it with the tools you already know or try to
-experiment with a different tool!
+4. **Research and learn about deployment strategies.**: A deployment strategy is a way of changing or upgrading your application without tearing it down,
+some examples of strategies are: **blue-green deployment**, **Rolling strategy**, **Canary deployments**, etc.
+5. **Choose a deployment strategy and present it to your trainer!**: You could make slides for this, or a diagram, or both! present the deployment strategy
+you want to implement to your application, explain why you chose that strategy, why is better than the other ones in your application and how would improve
+your application's performance.
