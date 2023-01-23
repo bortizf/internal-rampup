@@ -13,13 +13,13 @@ The rest of the course is structured as follows:
 7. Virtualization and Containerization.
 8. Cloud Computing.
 9. Infrastructure as Code.
-10. Continous Integration and Continous Deployment.
+10. Continuous Integration and Continuous Delivery.
 11. Observability (Questions).
 
 At the end of each section you will find exercises to practice what you have read and resources to go deeper into each topic.  
 
 ## Application
-In order to solve these challenges you will use a TODO application. It was built as independent componets called microservices. Each service is written with a different programming language. The application consists of 5 microservices as follows:
+In order to solve these challenges you will use a TODO application. It was built using independent components called microservices. Each service is written with a different programming language. The application consists of 5 microservices as follows:
 * Users Service
 * Authentication Service
 * TODOs Service

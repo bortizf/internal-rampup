@@ -228,19 +228,19 @@ For more information about commands you can follow this sources
 
 
 ## Branching Strategies 
-A branching strategy is something a software development team uses when interacting with a version control system for writing and managing code. As the name suggests, the branching strategy focuses on how branches are used in the development process.
+A branching strategy is something that a software development team uses when interacting with a version control system for writing and managing code. As the name suggests, the branching strategy focuses on how branches are used in the development process.
 
-One major purpose of a version control system is to enable a collaborative development environment without overlapping or affecting the codebase. There, each team member modifying the same source code will inevitably be making conflicting code changes. However, we can avoid such conflicts with a version control system by using branches when writing and merging code to a master branch to create the end product.
+One major purpose of a version control system is to enable a collaborative development environment without overlapping or affecting the codebase. There, each team member modifying the same source code will inevitably create conflicts in code changes. However, we can avoid such conflicts with a version control system by using branches when writing and merging code to a master branch to create the end product.
 
 A properly implemented branching strategy will be the key to creating an efficient DevOps process. DevOps is focused on creating a fast, streamlined, and efficient workflow without compromising the quality of the end product.
 
-A branching strategy helps define how the delivery team functions and how each feature, improvement, or bug fix is handled. It also reduces the complexity of the delivery pipeline by allowing developers to focus on developments and deployments only on the relevant branches—without affecting the entire product.
-## Selecting a Branch Strategy 
+A branching strategy helps to define how the delivery team functions and how each feature, improvement, or bug fix is handled. It also reduces the complexity of the delivery pipeline by allowing developers to focus on developments and deployments only on the relevant branches—without affecting the entire product.
+## Selecting a Branching Strategy 
 The selection process for a branching strategy depends entirely on the users and the project requirements. Factors like the development method, scale, user preferences highly impact this selection. Additionally, other factors like CI/CD tools decide what branching strategies can be used in your DevOps pipeline.
 
 Branching strategies that do not align or make it more difficult to implement Continuous Integration and Continuous Delivery in DevOps pipelines should not be used in a DevOps environment.
 
-The most common branching strategies are
+The most common branching strategies are:
 
 ### Git Flow
 Git Flow is the most widely known branching strategy that takes a multi-branch approach to manage the source code. This approach consists of two main branches that live throughout the development lifecycle.
@@ -258,17 +258,18 @@ The GitLab strategy combines feature-driven development and feature branches wit
 
 In GitLab Flow, development happens in one of these environmental branches, and verified and tested code is merged to other branches until they reach the production branch
 
-For more information about this we highly recommend to take a look to this sources
+For more information about this we highly recommend to take a look to these sources:
 
 * https://www.bmc.com/blogs/devops-branching-strategies
 * https://www.flagship.io/git-branching-strategies/
   
 ## GitOps
-GitOps is a set of practices that are aimed at managing the underlying infrastructure of an application. It utilizes Git as the source code management tool for managing the infrastructure code. In other words, GitOps is an evaluation of infrastructure as code and DevOps practices which uses Git as the single source of truth for provisioning infrastructure declaratively.
+GitOps is a set of practices that are aimed to manage the underlying infrastructure of an application. It utilizes Git as the source code management tool for managing the infrastructure code. In other words, GitOps is an evaluation of infrastructure as code and DevOps practices which uses Git as the single source of truth for provisioning infrastructure declaratively.
 GitOps allows developers or the Ops team to declare their infrastructure as code and version control them via Git. Whenever a new change is required, a pull request with the new change is created, executing the CI/CD pipeline to provision or modify the infrastructure.
 
-For more information about GitOps we recommend this source
+For more information about GitOps we recommend this source:
 https://www.bmc.com/blogs/gitops-cloud-native-app-delivery/
+
 ## Challenges
 * For gaming practice we suggest you to do at least one of the following websites. If you want you can do all of these:
   * https://learngitbranching.js.org/
@@ -278,7 +279,7 @@ https://www.bmc.com/blogs/gitops-cloud-native-app-delivery/
 
 * Create repositories for your scripts and next challenges
 * Select a branching model and apply it to your repositories. Make a diagram explaining the branching model. 
-* You need to apply that strategy to every repository you’ll use for this RampUp. For example, if you decide to upload your scripts (refer to Scripting) of your infrastructure code (refer to IaC) in different repos, apply that strategy in every single one of those repos. Even if those repos are not created yet, when you do so, apply a branching strategy to them (it could be different though)
+* You need to apply that strategy to every repository you’ll use for this Ramp-Up. For example, if you decide to upload your scripts (refer to Scripting) of your infrastructure code (refer to IaC) in different repos, apply that strategy in every single one of those repos. Even if those repos are not created yet, when you do so, apply a branching strategy to them (it could be different though)
   
 ## References
 * https://about.gitlab.com/topics/version-control/
@@ -287,8 +288,4 @@ https://www.bmc.com/blogs/gitops-cloud-native-app-delivery/
 * https://danielmiessler.com/study/git/
 * https://www.geeksforgeeks.org/what-is-a-git-repository/
 * https://git-scm.com/book/en/v2/
-* https://www.bmc.com/blogs/devops-branching-strategies/#:~:text=What%20is%20a%20branching%20strategy,used%20in%20the%20development%20process.
-
-
-
-
+* https://www.bmc.com/blogs/devops-branching-strategies/#:~:text=What%20is%20a%20branching%20strategy,used%20in%20the%20development%20process
