@@ -23,14 +23,14 @@ To retrieve information from a variable we used the `$` sign, as follows:
 
 echo $varname # will output PRFT
 ```
-there are some builtin variables called *special parameters*:
+There are some builtin variables called *special parameters*:
 * `$1`, `$2`, ... `$n`: this contains the arguments that are passed to the current script or function.
 * `$@` it expands to a list of all positional parameters.
 * `$#` expands to the number of positional parameters that you passed to the function or the script.
 * `$?` expands to the exit code of the most recently executed foreground command.
 
 ## Conditionals
-`if` is the keyword to check that a command's exit code was successfull or not. An exit code is like a return value from the command's execution. It's 0 to denote success, and any other number less than 255 to denote failures.
+`if` is the keyword to check if a command's exit code was successfull or not. An exit code is like a return value from the command's execution. It's 0 to denote success, and any other number less than 255 to denote failures.
 
 ```bash
 #!/bin/bash
@@ -48,13 +48,13 @@ else
 fi
 ```
 
-the comparison operatos `=`, `!=`, `>`, `<` treat their arguments as strings. To compare numeric values Bash has another set of operators: 
+The comparison operatos `=`, `!=`, `>`, `<` treat their arguments as strings. To compare numeric values Bash has another set of operators: 
 * `eq`: equal
 * `ne`: no equal
 * `lt`: less than, `le` less than or equal
 * `gt`: greater than, `ge` greater than or equal
 
-can you guess what's the output of the following script?
+Can you guess what's the output of the following script?
 
 ```bash
 #!/bin/bash
@@ -98,7 +98,7 @@ On Bash there are *While* and *For* loops. Also, there is a variant of the While
 * `for` *variable* `in` *list*: repeat for each element in the list, setting *variable* to each element in turn.
 * `for ((`*expression*`;`*expression*`;`*expression*`))`: starts evaluating the first arithmetic *expression* and will run as long as the second arithmetic *expression* is successfully, and at the end of each loop evaluates the third *expression* (generally this is an increment to variable in turn)
 
-this is the geneal syntax of a Bash loop: 
+this is the general syntax of a Bash loop: 
 ```bash
 # here comes one of the forms we saw, e.g., while *expression*
 while expression
@@ -143,7 +143,7 @@ done
 ```
 ## Arrays
 
-In Bash an array is a numbered list of strings: it maps integers to strings. There are multiple ways to create an array, but the easiest one is this:
+In Bash, an array is a numbered list of strings: it maps integers to strings. There are multiple ways to create an array but the easiest one is this:
 ```bash
 #!/bin/bash
 array=("one" "two" "three" "for")
@@ -201,8 +201,8 @@ If you define a variable inside a function, it will be a global variable unless 
 * Display only the even numbers from 1 to 100.
 * Compare natural numbers and display "X is greater than Y", "X is equal to Y" or "X is less than Y".
 * Read N numbers from the stdio and compute their average.
-* Check if a file exists, if it doens't exists, create it.
+* Check if a file exists, if it doesn't exist, create it.
 * Write a script that outputs the current time and date. For example: "Current time: 08:02, Current date: 2022-08-10"
 * Write a script that prints how many parameters are passed and which ones? For example, if I run the script like this: `./script1 p1 p2 p3 p4`, then it should print: `4 params were passed and they're these ones: p1, p2, p3, p4`
 * Write a script that prints information about your OS and version, release number, and kernel version.
-* Write a script that checks if cups service is running. If it running, prints "Cups' status is running". Otherwise, prints "Cups's status is stopped".
+* Write a script that checks if cups service is running. If it running, print "Cups' status is running". Otherwise, prints "Cups's status is stopped".

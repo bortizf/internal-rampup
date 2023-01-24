@@ -20,27 +20,27 @@ A hypervisor is a software that separates the physical resources from the virtua
 * **Type 2 hypervisors** run as an application on an existing OS. For example, VirtualBox or VMWare Workstation.
 
 ## Types of virtualization
-There are many type of virtualization, we will discuss the most common ones: 
+There are many types of virtualization, we will discuss the most common ones: 
 * **Desktop virtualization** lets you run multiple desktop operating systems, each in its own VM on the same computer. There are two types of desktop virtualization: *Virtual desktop infrastructure (VDI)* and *local desktop virtualization*. 
-* **Network virtualization** abstracts hardware elements and functions (e.g., connections, switches, routers, etc.) and abstracts them into software running on a hypervisor. Types of network virtualization includes *software-define networking (SDN)* and *network function virtualization (NFV)*
+* **Network virtualization** abstracts hardware elements and functions (e.g., connections, switches, routers, etc.) and abstracts them into software running on a hypervisor. Types of network virtualization includes *software-defined networking (SDN)* and *network function virtualization (NFV)*
 * **Storage virtualization** enables all the storage devices on the network to be accessed and managed as a single storage device called shared pools.
 
 ## Virtualization Challenge
-In this section you will have to create a complete virtual environment to run each microservice in different VMs. This should be done using a tool called Vagrant or any other tool to create VMs in a declarative way. Vagrant is a command-line utility for building and managing virtual environments. It creates, starts up, provisions, and destroys VMs easily. Each VM should be provision to execute the microservice you want to run in it. The provisioning should be done via scripting or tools like Ansible, Puppet, among others. You should use Git to track the changes on the infrastructure. While doing this challenge, try to answer these questions:
+In this section you will have to create a complete virtual environment to run each microservice on different VMs. This should be done using a tool called Vagrant or any other tool to create VMs in a declarative way. Vagrant is a command-line utility for building and managing virtual environments. It creates, starts up, provisions, and destroys VMs easily. Each VM should be provisioned to execute the microservice you want to run on it. The provisioning should be done via scripting or tools like Ansible, Puppet, among others. You should use Git to track the changes on the infrastructure. While doing this challenge, try to answer these questions:
 * What are the advantages of using a declarative tool to create the virtual environment?
-* Are you scripts handling idempotence?
-* Can you automate the process of provision and running each microservice? For example, that after the *vagrant up* command finishes all the application is running.
+* Are your scripts handling idempotence?
+* Can you automate the process of provisioning and running each microservice? For example, after the *vagrant up* command finishes the whole application is running.
 
 [Here](https://www.youtube.com/watch?v=sr9pUpSAexE) you can find a video tutorial that explains the basics of Vagrant. Also, the [getting started](https://learn.hashicorp.com/collections/vagrant/getting-started) documentation may help you.
 
 ##  What's containerization?
-Containerization is a type of virtualization. In particular, it focus on OS-level virtualization. Containerization is the packaging together of software code with all it’s necessary components like libraries, frameworks, and other dependencies so that they are isolated in their own. Usually, people confuse containers with VMs, however their underlying infrastructure is very different:
+Containerization is a type of virtualization. In particular, it focuses on OS-level virtualization. Containerization is the packaging together of software code with all it’s necessary components such as libraries, frameworks, and other dependencies so that they are isolated in their own environment. People often confuse containers with VMs, but their underlying infrastructure is very different:
 ![](./imgs/virtualization-vs-containers.png)
 
-Containerization technology shares most of the benefits of VMs, with the difference being scalability. Containers are lightweight virtualization, so creating or destroy them has little overhead.
+Container technology shares most of the advantages of virtual machines with the difference of scalability. Containers are lightweight virtualization, so creating or destroying them has little overhead.
 
 ## Docker
-Docker is a set of platform as a service (PaaS) products that use OS-level virtualization to deliver software in packages called containers. Docker has an easy interface to manage Docker containers. Let's discuss some of the main Docker concepts.
+Docker is a set of platform as a service (PaaS) products that use OS-level virtualization to deliver software in packages called containers. Docker has an easy interface to manage containers. Let's discuss some of the main Docker concepts.
 
 ### Image
 Containers are instances of a particular image. A Docker image is a file that contains the instructions you need for your container. It is a template. Docker images are built from an instructional file named **Dockerfile** that is parsed by Docker runtime. This is an example of a Dockerfile: 
@@ -52,12 +52,12 @@ RUN <install some dependencies>
 CMD <command that is executed on `docker container run`>
 ```
 
-You can list all the installed images in your host with `docker images ls`
+You can list all downloaded images in your host with `docker images ls`
 
 ### Container
-Containers only contain that which is required to execute an application; and you can start, stop and interact with them. They are isolated environments in the host machine with the ability to interact with each other and the host machine itself via defined methods.
+Containers only contain that which is required to execute an application; and you can start, stop and interact with them. They are isolated environments on the host machine with the ability to interact with each other and the host machine itself via defined methods.
 
-To see all you running containers, type `docker container ls`. You can add the `-a` flag to list the stopped ones too.
+To see all your running containers type `docker container ls`. You can add the `-a` flag to list the stopped ones too.
 
 ## Most used Docker commands
 
@@ -84,6 +84,6 @@ To see all you running containers, type `docker container ls`. You can add the `
 echo "Hello, Perficient!"
 ```
 * When you pass the *server* command to the *devopsdockeruh/simple-web-service* image, it will create a container with a web service running on port 8080. Access it from your localhost address. You will get a message like this: "{ message: "You connected to the following path: ..."
-* Make sure you understand the **docker-compose** command. How to install it and what do we need it. [Here](https://www.baeldung.com/ops/docker-compose) you can find information about it.
-* Create a Dockerfile per each microservice in [our microservice application](https://github.com/bortizf/microservice-app-example). After that, run each microservice separately.
+* Make sure you understand the **docker-compose** command. How to install it and what we need it for. [Here](https://www.baeldung.com/ops/docker-compose) you can find information about it.
+* Create a Dockerfile for every microservice in [our microservice application](https://github.com/bortizf/microservice-app-example). After that, run each microservice separately.
 * Finally, create a docker-compose file to run all the microservices at once.
